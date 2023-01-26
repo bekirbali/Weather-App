@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+body {
+  height: 100vh;
+  background-image: url(https://images.unsplash.com/photo-1673993599169-32f4b7e8cbd4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  main {
+    display: flex;
+    height: 100%;
+    .main-container {
+      flex: 3;
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      padding-left: 1rem;
+      padding-bottom: 1rem;
+      .degree {
+        font-size: 5rem;
+      }
+      .city-info {
+        .city {
+          font-size: 2.5rem;
+        }
+        .date {
+          font-size: 1rem;
+        }
+      }
+      .weather-info {
+        .icon {
+          font-size: 1.2rem;
+        }
+        .weather-name {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .form-side {
+      position: relative;
+      flex: 2;
+      backdrop-filter: blur(1rem);
+      right: 0;
+      box-shadow: 1px 1px 20px 5px rgba($color: #000000, $alpha: 0.5);
+      padding-left: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      .search-bar {
+        flex: 1;
+        display: flex;
+        gap: 0.5rem;
+        input {
+          color: white;
+          flex: 10;
+          background: none;
+          border: none;
+          border-bottom: 1px solid white;
+          font-size: 1.5rem;
+          padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+          margin-top: 1rem;
+          text-transform: capitalize;
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.753);
+            padding: 0.3rem;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+        button {
+          flex: 2;
+          width: 14%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+        }
+      }
+      .suggest-city {
+        flex: 5;
+        width: 85%;
+        ul {
+          height: 100%;
+          list-style-type: none;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+        }
+      }
+      .weather-details {
+        flex: 4;
+        border-top: 1px solid white;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        ul {
+          height: 85%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          list-style-type: none;
+          li {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  }
+}
