@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <section class="main-container">
+        <div class="degree">26°</div>
+        <div class="city-info">
+          <div class="city">New York</div>
+          <div class="date">26.01.2023</div>
+        </div>
+        <div class="weather-info">
+          <div class="icon">Some icon</div>
+          <div class="weather-name">Cloudy</div>
+        </div>
+      </section>
+      <aside class="form-side">
+        <form action="">
+          <div class="search-bar">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search location..."
+            />
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass fa-2x"></i>
+            </button>
+          </div>
+          <div class="suggest-city">
+            <ul class="cities">
+              <li>New York</li>
+              <li>Istanbul</li>
+              <li>London</li>
+              <li>Toronto</li>
+            </ul>
+          </div>
+          <div class="weather-details">
+            <h2>Weather Details</h2>
+            <ul class="details">
+              <li>
+                <p class="name">Cloudy</p>
+                <p class="percentage">25%</p>
+              </li>
+              <li>
+                <p class="name">Humidity</p>
+                <p class="percentage">72%</p>
+              </li>
+              <li>
+                <p class="name">Wind</p>
+                <p class="percentage">6.1km/h</p>
+              </li>
+            </ul>
+          </div>
+        </form>
+      </aside>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>
