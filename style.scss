@@ -3,11 +3,12 @@
   padding: 0;
   box-sizing: border-box;
   color: white;
+  cursor: default;
 }
 
 body {
   height: 100vh;
-  background-image: url(https://images.unsplash.com/photo-1673993599169-32f4b7e8cbd4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80);
+  background-image: url(https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -18,30 +19,55 @@ body {
       flex: 3;
       display: flex;
       align-items: flex-end;
-      gap: 1rem;
       padding-left: 1rem;
-      padding-bottom: 1rem;
-      .degree {
-        font-size: 5rem;
+      // padding-bottom: 1rem;
+      &::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.349),
+          rgba(0, 0, 0, 0.315)
+        );
+        z-index: 0;
       }
-      .city-info {
-        .city {
-          font-size: 2.5rem;
+      .main-details {
+        position: relative;
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        .degree {
+          font-size: 5rem;
+          display: flex;
+          align-items: center;
         }
-        .date {
-          font-size: 1rem;
+        .city-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          .city {
+            font-size: 2.5rem;
+          }
+          .date {
+            font-size: 1rem;
+          }
         }
-      }
-      .weather-info {
-        .icon {
-          font-size: 1.2rem;
-        }
-        .weather-name {
-          font-size: 1.2rem;
+        .weather-info {
+          .icon {
+            font-size: 1.2rem;
+          }
+          .weather-name {
+            font-size: 1.2rem;
+            text-align: center;
+          }
         }
       }
     }
-
     .form-side {
       position: relative;
       flex: 2;
@@ -68,6 +94,7 @@ body {
           padding: 0.2rem 0.5rem 0.2rem 0.2rem;
           margin-top: 1rem;
           text-transform: capitalize;
+          cursor: auto;
           &::placeholder {
             color: rgba(255, 255, 255, 0.753);
             padding: 0.3rem;
@@ -83,17 +110,25 @@ body {
           align-items: center;
           justify-content: center;
           border: none;
+          background: none;
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
       .suggest-city {
         flex: 5;
         width: 85%;
+        display: flex;
         ul {
           height: 100%;
           list-style-type: none;
           display: flex;
           flex-direction: column;
           justify-content: space-around;
+          li {
+            cursor: pointer;
+          }
         }
       }
       .weather-details {
