@@ -17,14 +17,20 @@
   <body>
     <main>
       <section class="main-container">
-        <div class="degree">26°</div>
-        <div class="city-info">
-          <div class="city">New York</div>
-          <div class="date">26.01.2023</div>
-        </div>
-        <div class="weather-info">
-          <div class="icon">Some icon</div>
-          <div class="weather-name">Cloudy</div>
+        <div class="main-details">
+          <div class="degree"></div>
+          <div class="city-info">
+            <div class="city">Istanbul,TR</div>
+            <div class="date">
+              <script>
+                document.write(new Date().toLocaleDateString());
+              </script>
+            </div>
+          </div>
+          <div class="weather-info">
+            <div class="icon"></div>
+            <div class="weather-name"></div>
+          </div>
         </div>
       </section>
       <aside class="form-side">
