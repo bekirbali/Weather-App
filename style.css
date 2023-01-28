@@ -8,7 +8,7 @@
 
 body {
   height: 100vh;
-  background-image: url(https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80);
+  background-image: url("https://source.unsplash.com/1600x900/?istanbul");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -37,11 +37,11 @@ body main .main-container .main-details {
   position: relative;
   width: 100%;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   margin-bottom: 1rem;
 }
 body main .main-container .main-details .degree {
-  font-size: 5rem;
+  font-size: 6rem;
   display: flex;
   align-items: center;
 }
@@ -54,7 +54,10 @@ body main .main-container .main-details .city-info .city {
   font-size: 2.5rem;
 }
 body main .main-container .main-details .city-info .date {
-  font-size: 1rem;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 body main .main-container .main-details .weather-info .icon {
   font-size: 1.2rem;
@@ -152,4 +155,5 @@ body main form .weather-details ul {
 body main form .weather-details ul li {
   display: flex;
   justify-content: space-between;
+  border-bottom: dashed 1px rgba(255, 255, 255, 0.39);
 }/*# sourceMappingURL=style.css.map */
