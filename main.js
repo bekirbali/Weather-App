@@ -46,7 +46,6 @@ searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const url = `${urlStart + citySearch.value + key}`;
 
-  let newCityName = citySearch.value;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
@@ -79,7 +78,13 @@ const weather = (data) => {
   weatherStatus(data);
   bgChange(data);
   timeStamp(data);
-  console.log(allData.lastCityName);
+  const allData = {
+    lastCityName: cityName.innerHTML,
+    lastDegree: degree.innerHTML,
+    lastDay: day.innerHTML,
+    lastIconUrl: iconText.innerHTML,
+    lastWeatherName: weatherName.innerHTML,
+  };
 };
 
 const weatherOnLoad = (data) => {
