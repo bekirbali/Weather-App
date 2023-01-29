@@ -1,3 +1,5 @@
+// ********************************* OOOO *************************************
+
 const key = "&units=metric&appid=6d8d685969d439d8178c3b7a901ebcf4";
 const urlStart = "https://api.openweathermap.org/data/2.5/weather?q=";
 
@@ -22,13 +24,18 @@ const istanbul = document.querySelector(".cities :nth-child(2)");
 const london = document.querySelector(".cities :nth-child(3)");
 const toronto = document.querySelector(".cities :nth-child(4)");
 
+// ********************************* OOOO *************************************
+
+let myData = JSON.parse(localStorage.getItem("myData")) || [];
+
+// ********************************* OOOO *************************************
+
 window.addEventListener("load", () => {
   fetch(
     "https://api.openweathermap.org/data/2.5/weather?q=istanbul&units=metric&appid=6d8d685969d439d8178c3b7a901ebcf4"
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       weatherOnLoad(data);
     });
 });
@@ -40,11 +47,9 @@ searchBtn.addEventListener("click", (e) => {
   const url = `${urlStart + citySearch.value + key}`;
 
   let newCityName = citySearch.value;
-  console.log(newCityName);
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       weather(data);
     });
   citySearch.closest("form").reset();
@@ -74,6 +79,7 @@ const weather = (data) => {
   weatherStatus(data);
   bgChange(data);
   timeStamp(data);
+  console.log(allData.lastCityName);
 };
 
 const weatherOnLoad = (data) => {
@@ -86,9 +92,7 @@ const weatherOnLoad = (data) => {
 
 const changeCityName = (data) => {
   const { sys } = data;
-  console.log(sys);
   const { country } = sys;
-  console.log(country);
   cityName.innerHTML = `${data.name}, ${country}`;
 };
 
@@ -97,8 +101,6 @@ const changeCityName = (data) => {
 const weatherStatus = (data) => {
   const { main, weather, wind } = data;
   const { humidity, temp } = main;
-  console.log(humidity, Math.round(temp));
-
   humidityP.innerHTML = `${humidity}%`;
 
   //* ******* DEGREE *******
@@ -137,7 +139,6 @@ const bgChange = (city) => {
 const timeStamp = (data) => {
   let cityTime = data.dt;
   cityTime = new Date(cityTime * 1000);
-  console.log(cityTime);
   let today = new Date().getDay();
   switch (today) {
     case 0:
@@ -162,4 +163,12 @@ const timeStamp = (data) => {
       day.innerHTML = "Saturday";
       break;
   }
+};
+
+const allData = () => {
+  let lastCityName = cityName.innerHTML;
+  let lastDegree = degree.innerHTML;
+  let lastDay = day.innerHTML;
+  let lastIconUrl = iconText.innerHTML;
+  let lastWeatherName = weatherName.innerHTML;
 };
