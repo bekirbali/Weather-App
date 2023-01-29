@@ -19,24 +19,38 @@ const searchBtn = document.querySelector("button");
 
 const cities = document.querySelector(".cities");
 
-const newYork = document.querySelector(".cities :nth-child(1)");
-const istanbul = document.querySelector(".cities :nth-child(2)");
-const london = document.querySelector(".cities :nth-child(3)");
-const toronto = document.querySelector(".cities :nth-child(4)");
+const firstCity = document.querySelector(".cities :nth-child(1)");
+const secondCity = document.querySelector(".cities :nth-child(2)");
+const thirdCity = document.querySelector(".cities :nth-child(3)");
+const lastCity = document.querySelector(".cities :nth-child(4)");
+console.log(lastCity);
 
 // ********************************* OOOO *************************************
 
-let myData = JSON.parse(localStorage.getItem("myData")) || [];
+let cityData = JSON.parse(localStorage.getItem("cityData")) || [];
 
 // ********************************* OOOO *************************************
 
 window.addEventListener("load", () => {
+  cityData.length > 4 && cityData.shift();
+  let SuggestedCities = [firstCity, secondCity, thirdCity, lastCity];
+  let DBCities = [];
+  for (let v of Object.values(cityData)) {
+    let arr = v.lastCityName.split(",");
+    DBCities.unshift(arr[0]);
+    console.log(arr);
+  }
+  for (let i = 0; i < DBCities.length; i++) {
+    if (DBCities[i]) {
+      SuggestedCities[i].innerHTML = DBCities[i];
+    }
+  }
   fetch(
-    "https://api.openweathermap.org/data/2.5/weather?q=istanbul&units=metric&appid=6d8d685969d439d8178c3b7a901ebcf4"
+    `https://api.openweathermap.org/data/2.5/weather?q=${firstCity.innerHTML}&units=metric&appid=6d8d685969d439d8178c3b7a901ebcf4`
   )
     .then((res) => res.json())
     .then((data) => {
-      weatherOnLoad(data);
+      weather(data);
     });
 });
 
@@ -49,6 +63,7 @@ searchBtn.addEventListener("click", (e) => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       weather(data);
     });
   citySearch.closest("form").reset();
@@ -57,8 +72,9 @@ searchBtn.addEventListener("click", (e) => {
 //? WITH CITY NAMES
 
 cities.addEventListener("click", (e) => {
+  e.preventDefault();
   if (!e.target.classList.contains("cities")) {
-    let listedName = e.target.closest("li").innerHTML;
+    let listedName = e.target.closest("button").innerHTML;
     const url = `${urlStart + listedName + key}`;
     fetch(url)
       .then((res) => res.json())
@@ -85,6 +101,27 @@ const weather = (data) => {
     lastIconUrl: iconText.innerHTML,
     lastWeatherName: weatherName.innerHTML,
   };
+  cityData.push(allData);
+  localStorage.setItem("cityData", JSON.stringify(cityData));
+  console.log(cityData.length);
+  cityData.length > 4 && cityData.shift();
+  let SuggestedCities = [firstCity, secondCity, thirdCity, lastCity];
+  let DBCities = [];
+  for (let v of Object.values(cityData)) {
+    let arr = v.lastCityName.split(",");
+    DBCities.unshift(arr[0]);
+    console.log(arr);
+  }
+  for (let i = 0; i < DBCities.length; i++) {
+    if (DBCities[i]) {
+      if (SuggestedCities[i].innerHTML != DBCities[i]) {
+        SuggestedCities[i].innerHTML = DBCities[i];
+      } else {
+        console.log("you already have this one");
+      }
+    }
+  }
+  console.log(DBCities);
 };
 
 const weatherOnLoad = (data) => {
@@ -168,12 +205,4 @@ const timeStamp = (data) => {
       day.innerHTML = "Saturday";
       break;
   }
-};
-
-const allData = () => {
-  let lastCityName = cityName.innerHTML;
-  let lastDegree = degree.innerHTML;
-  let lastDay = day.innerHTML;
-  let lastIconUrl = iconText.innerHTML;
-  let lastWeatherName = weatherName.innerHTML;
 };

@@ -65,9 +65,9 @@ body main .main-container .main-details .weather-info .icon {
 }
 body main .main-container .main-details .weather-info .icon img {
   border-radius: 50%;
+  transition: 0.3s ease-in-out;
 }
 body main .main-container .main-details .weather-info .icon img:hover {
-  transition: 0.3s ease-in-out;
   transform: scale(1.3);
 }
 body main .main-container .main-details .weather-info .weather-name {

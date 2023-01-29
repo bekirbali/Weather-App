@@ -67,8 +67,8 @@ body {
             font-size: 1.2rem;
             img {
               border-radius: 50%;
+              transition: 0.3s ease-in-out;
               &:hover {
-                transition: 0.3s ease-in-out;
                 transform: scale(1.3);
               }
             }
