@@ -23,7 +23,6 @@ const firstCity = document.querySelector(".cities :nth-child(1)");
 const secondCity = document.querySelector(".cities :nth-child(2)");
 const thirdCity = document.querySelector(".cities :nth-child(3)");
 const lastCity = document.querySelector(".cities :nth-child(4)");
-console.log(lastCity);
 
 // ********************************* OOOO *************************************
 
@@ -38,12 +37,9 @@ window.addEventListener("load", () => {
   for (let v of Object.values(cityData)) {
     let arr = v.lastCityName.split(",");
     DBCities.unshift(arr[0]);
-    console.log(arr);
   }
   for (let i = 0; i < DBCities.length; i++) {
-    if (DBCities[i]) {
-      SuggestedCities[i].innerHTML = DBCities[i];
-    }
+    SuggestedCities[i].innerHTML = DBCities[i];
   }
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${firstCity.innerHTML}&units=metric&appid=6d8d685969d439d8178c3b7a901ebcf4`
@@ -63,7 +59,6 @@ searchBtn.addEventListener("click", (e) => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       weather(data);
     });
   citySearch.closest("form").reset();
@@ -79,7 +74,6 @@ cities.addEventListener("click", (e) => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         weather(data);
         citySearch.closest("form").reset();
       });
@@ -103,25 +97,18 @@ const weather = (data) => {
   };
   cityData.push(allData);
   localStorage.setItem("cityData", JSON.stringify(cityData));
-  console.log(cityData.length);
   cityData.length > 4 && cityData.shift();
   let SuggestedCities = [firstCity, secondCity, thirdCity, lastCity];
   let DBCities = [];
   for (let v of Object.values(cityData)) {
     let arr = v.lastCityName.split(",");
     DBCities.unshift(arr[0]);
-    console.log(arr);
   }
   for (let i = 0; i < DBCities.length; i++) {
     if (DBCities[i]) {
-      if (SuggestedCities[i].innerHTML != DBCities[i]) {
-        SuggestedCities[i].innerHTML = DBCities[i];
-      } else {
-        console.log("you already have this one");
-      }
+      SuggestedCities[i].innerHTML = DBCities[i];
     }
   }
-  console.log(DBCities);
 };
 
 const weatherOnLoad = (data) => {
