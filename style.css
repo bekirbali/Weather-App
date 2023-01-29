@@ -63,6 +63,13 @@ body main .main-container .main-details .city-info .date {
 body main .main-container .main-details .weather-info .icon {
   font-size: 1.2rem;
 }
+body main .main-container .main-details .weather-info .icon img {
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+}
+body main .main-container .main-details .weather-info .icon img:hover {
+  transform: scale(1.3);
+}
 body main .main-container .main-details .weather-info .weather-name {
   font-size: 1.2rem;
   text-align: center;
@@ -128,6 +135,9 @@ body main form .search-bar button {
 body main form .search-bar button:hover {
   cursor: pointer;
 }
+body main form .search-bar button i:hover {
+  cursor: pointer;
+}
 body main form .suggest-city {
   flex: 5;
   width: 85%;
@@ -142,11 +152,15 @@ body main form .suggest-city ul {
   justify-content: space-around;
   padding-left: 0.5rem;
 }
-body main form .suggest-city ul li {
+body main form .suggest-city ul button {
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  font-size: 1.2rem;
+  text-align: left;
 }
-body main form .suggest-city ul li:hover {
+body main form .suggest-city ul button:hover {
+  transition: 0.4s ease-in-out;
   color: rgb(255, 2, 2);
 }
 body main form .weather-details {
