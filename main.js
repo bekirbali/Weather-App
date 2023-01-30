@@ -27,6 +27,7 @@ const lastCity = document.querySelector(".cities :nth-child(4)");
 // ********************************* OOOO *************************************
 
 let cityData = JSON.parse(localStorage.getItem("cityData")) || [];
+let cityUrl = JSON.parse(localStorage.getItem("cityUrl")) || [];
 
 // ********************************* OOOO *************************************
 
@@ -41,43 +42,67 @@ window.addEventListener("load", () => {
   for (let i = 0; i < DBCities.length; i++) {
     SuggestedCities[i].innerHTML = DBCities[i];
   }
-  fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${firstCity.innerHTML}&units=metric&appid=6d8d685969d439d8178c3b7a901ebcf4`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      weather(data);
-    });
+
+  const { lastDegree, lastCityName, lastIconUrl, lastWeatherName, lastDay } =
+    cityData[cityData.length - 1];
+  degree.innerHTML = lastDegree;
+  cityName.innerHTML = lastCityName;
+  day.innerHTML = lastDay;
+  iconText.innerHTML = lastIconUrl;
+  weatherName.innerHTML = lastWeatherName;
 });
 
 //? WITH SEARCH BUTTON
 
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const url = `${urlStart + citySearch.value + key}`;
-
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      weather(data);
-    });
-  citySearch.closest("form").reset();
+  if (citySearch.value) {
+    const url = `${urlStart + citySearch.value + key}`;
+    if (
+      cityUrl[cityUrl.length - 1] == url ||
+      firstCity.innerHTML.includes(citySearch.value)
+    ) {
+      alert(`You are already seeing ${citySearch.value}`);
+      citySearch.closest("form").reset();
+      return;
+    } else {
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          weather(data);
+        });
+      citySearch.closest("form").reset();
+    }
+    cityUrl.length > 0 && cityUrl.shift();
+    cityUrl.push(url);
+    localStorage.setItem("cityUrl", JSON.stringify(cityUrl));
+  } else {
+    alert("please enter something");
+  }
 });
 
 //? WITH CITY NAMES
 
 cities.addEventListener("click", (e) => {
   e.preventDefault();
+
   if (!e.target.classList.contains("cities")) {
-    let listedName = e.target.closest("button").innerHTML;
-    const url = `${urlStart + listedName + key}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        weather(data);
-        citySearch.closest("form").reset();
-      });
-    return;
+    if (
+      e.target.closest("button") != cities.firstElementChild &&
+      e.target.closest("button").innerHTML != cities.firstElementChild.innerHTML
+    ) {
+      let listedName = e.target.closest("button").innerHTML;
+      const url = `${urlStart + listedName + key}`;
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          weather(data);
+          citySearch.closest("form").reset();
+        });
+      return;
+    } else {
+      return "";
+    }
   }
 });
 
@@ -95,9 +120,9 @@ const weather = (data) => {
     lastIconUrl: iconText.innerHTML,
     lastWeatherName: weatherName.innerHTML,
   };
+  cityData.length > 4 && cityData.shift();
   cityData.push(allData);
   localStorage.setItem("cityData", JSON.stringify(cityData));
-  cityData.length > 4 && cityData.shift();
   let SuggestedCities = [firstCity, secondCity, thirdCity, lastCity];
   let DBCities = [];
   for (let v of Object.values(cityData)) {
@@ -105,9 +130,7 @@ const weather = (data) => {
     DBCities.unshift(arr[0]);
   }
   for (let i = 0; i < DBCities.length; i++) {
-    if (DBCities[i]) {
-      SuggestedCities[i].innerHTML = DBCities[i];
-    }
+    SuggestedCities[i].innerHTML = DBCities[i];
   }
 };
 
