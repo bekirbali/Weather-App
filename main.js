@@ -43,13 +43,24 @@ window.addEventListener("load", () => {
     SuggestedCities[i].innerHTML = DBCities[i];
   }
 
-  const { lastDegree, lastCityName, lastIconUrl, lastWeatherName, lastDay } =
-    cityData[cityData.length - 1];
+  const {
+    lastDegree,
+    lastCityName,
+    lastIconUrl,
+    lastWeatherName,
+    lastDay,
+    lastDetails,
+    lastHumidity,
+    lastWind,
+  } = cityData[cityData.length - 1];
   degree.innerHTML = lastDegree;
   cityName.innerHTML = lastCityName;
   day.innerHTML = lastDay;
   iconText.innerHTML = lastIconUrl;
   weatherName.innerHTML = lastWeatherName;
+  weatherDetails.lastElementChild.innerHTML = lastDetails;
+  humidityP.innerHTML = lastHumidity;
+  windP.innerHTML = lastWind;
 });
 
 //? WITH SEARCH BUTTON
@@ -119,6 +130,9 @@ const weather = (data) => {
     lastDay: day.innerHTML,
     lastIconUrl: iconText.innerHTML,
     lastWeatherName: weatherName.innerHTML,
+    lastDetails: weatherDetails.lastElementChild.innerHTML,
+    lastHumidity: humidityP.innerHTML,
+    lastWind: windP.innerHTML,
   };
   cityData.length > 4 && cityData.shift();
   cityData.push(allData);
